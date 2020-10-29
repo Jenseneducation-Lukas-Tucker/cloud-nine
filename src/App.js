@@ -1,18 +1,43 @@
 import React, { Component } from 'react';
 import './App.css';
 import Saloon from './Saloon/Saloon';
+import Filter from './Filter/filter';
 
 class App extends Component {
   state = {
     saloons: [
-      { id: 'asfa1', name: 'Sax & Fön', price: "320kr" },
-      { id: 'vasdf1', name: 'Hårizont', price: "320 kr" },
-      { id: 'asdf11', name: 'Hårhuset', price: "320 kr" },
-      { id: 'a23', name: 'Hair & Nu', price: "320 kr" },
-      { id: 'as2353', name: 'Hårley Davidson', price: "320 kr" },
+      { id: 'asfa1', name: 'Sax & Fön', price: 300 ,location: 'Rådmansgatan 46' },
+      { id: 'vasdf1', name: 'Hårizont', price: 150 ,location: 'Rådmansgatan 46' },
+      { id: 'asdf11', name: 'Hårhuset', price: 320 ,location: 'Rådmansgatan 46' },
+      { id: 'a23', name: 'Hair & Nu', price: 500 ,location: 'Rådmansgatan 46' },
+      { id: 'as2353', name: 'Hårley Davidson', price: 320, location:'Rådmansgatan 46' },
     ],
-    otherState: 'some other value',
+    sort:"",
     showSaloons: false
+  }
+  sortSaloons = (event) => {
+    //implement 
+    const sort = event.target.value
+    console.log(event.target.value);
+    this.setState((state) => ({
+      sort: sort,
+      saloons: this.state.saloons
+      .slice()
+      .sort((a , b) => 
+        sort === "lowest"
+        ? a.saloons.price > b.saloons.price
+        ? 1
+        : -1
+        : sort === "highest"
+        ? a.saloons.price < b.saloons.price
+        ? 1
+        :-1
+        : a._id > b._id
+        ? 1
+        :-1
+
+      ),
+    }))
   }
 
   nameChangedHandler = ( event, id ) => {
@@ -24,7 +49,7 @@ class App extends Component {
       ...this.state.saloons[saloonIndex]
     };
 
-    // const person = Object.assign({}, this.state.persons[personIndex]);
+
 
     saloon.name = event.target.value;
 
@@ -76,6 +101,10 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
+        <Filter count={this.state.saloons.length}
+        sort={this.state.sort}
+        sortSaloons={this.sortSaloons}
+        ></Filter>
         <button
           style={style}
           onClick={this.toggleSaloonHandler}>Toggle Saloons</button>

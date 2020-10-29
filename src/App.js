@@ -1,30 +1,89 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import './App.css';
-import FilterList from './FilterList';
-import Saloon from './Saloon.js'
-import SaloonList from './SaloonList.js'
-
+import Saloon from './Saloon/Saloon';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      Saloons: [
-        {name:'Sax & Fön', price:'320 kr', time:'30 min', rating: 4, location:'Rådmansgatan 46'},
-        {name:'Håriszont', price:'320 kr', time:'30 min', rating: 4, location:'Rådmansgatan 46'},
-        {name:'Hårhuset', price:'320 kr', time:'30 min', rating: 4, location:'Rådmansgatan 46'},
-        {name:'Hair & Nu', price:'320 kr', time:'30 min', rating: 4, location:'Rådmansgatan 46'},
-        {name:'Hårley Davidson', price:'320 kr', time:'30 min', rating: 4, location:'Rådmansgatan 46'}
-      ]
-    }
+  state = {
+    saloons: [
+      { id: 'asfa1', name: 'Sax & Fön', price: "320kr" },
+      { id: 'vasdf1', name: 'Hårizont', price: "320 kr" },
+      { id: 'asdf11', name: 'Hårhuset', price: "320 kr" },
+      { id: 'a23', name: 'Hair & Nu', price: "320 kr" },
+      { id: 'as2353', name: 'Hårley Davidson', price: "320 kr" },
+    ],
+    otherState: 'some other value',
+    showSaloons: false
   }
-  
-  render() {
+
+  nameChangedHandler = ( event, id ) => {
+    const saloonIndex = this.saloons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const saloon = {
+      ...this.state.saloons[saloonIndex]
+    };
+
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+
+    saloon.name = event.target.value;
+
+    const saloons = [...this.state.saloons];
+    saloons[saloonIndex] = saloon;
+
+    this.setState( {saloons: saloons} );
+  }
+
+  deleteSaloonHandler = (saloonIndex) => {
+    // const persons = this.state.persons.slice();
+    const saloons = [...this.state.saloons];
+    saloons.splice(saloonIndex, 1);
+    this.setState({saloons: saloons});
+  }
+
+  toggleSaloonHandler = () => {
+    const doesShow = this.state.showSaloons;
+    this.setState( { showSaloons: !doesShow } );
+  }
+
+  render () {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
+    let saloons = null;
+
+    if ( this.state.showSaloons ) {
+      saloons = (
+        <div>
+          {this.state.saloons.map((saloon, index) => {
+            return <Saloon
+              click={() => this.deleteSaloonHandler(index)}
+              name={saloon.name} 
+              price={saloon.price}
+              key={saloon.id}
+              changed={(event) => this.nameChangedHandler(event, saloon.id)} />
+          })}
+        </div>
+      );
+    }
+
     return (
-    <div className="App">
-      <h1>Saloon List</h1>
-    </div>
-  );
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <p>This is really working!</p>
+        <button
+          style={style}
+          onClick={this.toggleSaloonHandler}>Toggle Saloons</button>
+        {saloons}
+      </div>
+    );
+    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
+  }
 }
 
 export default App;

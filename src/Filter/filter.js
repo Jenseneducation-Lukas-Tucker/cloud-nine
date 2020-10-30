@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './filter.css'
 
 export default class Filter extends Component {
-    state = {  }
     render() { 
         return ( 
         <div className="Filter">

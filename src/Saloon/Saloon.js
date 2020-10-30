@@ -1,16 +1,16 @@
 import React from 'react';
 
 import './Saloon.css';
-import StarRating from '../StarRating/StarRating';
+import StarRating from '../StarRating/StarRating.js';
 
 const Saloon = ( props ) => {
     return (
         <div className="Saloon">
             <p onClick={props.click}>Welcome to {props.name}</p>
     <p>Price: {props.price}</p>
-            <p>{props.children}</p>
-            <StarRating/>
-            <input type="text" onChange={props.changed} value={props.name} />
+                <StarRating value={props.rating}/>
+        
+            <p>{props.location}</p>
         </div>
     )
 };

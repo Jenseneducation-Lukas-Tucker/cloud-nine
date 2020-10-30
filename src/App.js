@@ -6,11 +6,11 @@ import Filter from './Filter/filter';
 class App extends Component {
   state = {
     saloons: [
-      { id: 'asfa1', name: 'Sax & Fön', price: 300 ,location: 'Rådmansgatan 46' },
-      { id: 'vasdf1', name: 'Hårizont', price: 150 ,location: 'Rådmansgatan 46' },
-      { id: 'asdf11', name: 'Hårhuset', price: 320 ,location: 'Rådmansgatan 46' },
-      { id: 'a23', name: 'Hair & Nu', price: 500 ,location: 'Rådmansgatan 46' },
-      { id: 'as2353', name: 'Hårley Davidson', price: 320, location:'Rådmansgatan 46' },
+      { id: 'asfa1', name: 'Sax & Fön', price: 300 ,location: 'Rådmansgatan 46',  },
+      { id: 'vasdf1', name: 'Hårizont', price: 150 ,location: 'Rådmansgatan 46', },
+      { id: 'asdf11', name: 'Hårhuset', price: 320 ,location: 'Rådmansgatan 46', },
+      { id: 'a23', name: 'Hair & Nu', price: 500 ,location: 'Rådmansgatan 46', },
+      { id: 'as2353', name: 'Hårley Davidson', price: 320, location:'Rådmansgatan 46',},
     ],
     sort:"",
     showSaloons: false,
@@ -41,25 +41,6 @@ class App extends Component {
     }))
   }
 
-  nameChangedHandler = ( event, id ) => {
-    const saloonIndex = this.saloons.findIndex(p => {
-      return p.id === id;
-    });
-
-    const saloon = {
-      ...this.state.saloons[saloonIndex]
-    };
-
-
-
-    saloon.name = event.target.value;
-
-    const saloons = [...this.state.saloons];
-    saloons[saloonIndex] = saloon;
-
-    this.setState( {saloons: saloons} );
-  }
-
   deleteSaloonHandler = (saloonIndex) => {
     // const persons = this.state.persons.slice();
     const saloons = [...this.state.saloons];
@@ -81,8 +62,6 @@ class App extends Component {
       cursor: 'pointer'
     };
 
-    let saloons = null;
-
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
@@ -97,6 +76,7 @@ class App extends Component {
         sortSaloons={this.sortSaloons}
         ></Filter>
         </div> :null
+        
   }<div>
   {this.state.saloons.map((saloon, index) => {
     return <Saloon
@@ -104,7 +84,8 @@ class App extends Component {
       name={saloon.name} 
       price={saloon.price}
       key={saloon.id}
-      changed={(event) => this.nameChangedHandler(event, saloon.id)} />
+      rating={saloon.rating}
+      location={saloon.location}/>
   })}
 </div>
       </div>

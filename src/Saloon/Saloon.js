@@ -5,10 +5,12 @@ import StarRating from '../StarRating/StarRating.js';
 
 const Saloon = ( props ) => {
     return (
-        <div className="Saloon">
+        <div className="Saloon" >
+            <a href="/moreinfo">more info</a>
             <p onClick={props.click}>Welcome to {props.name}</p>
     <p>Price: {props.price}</p>
-                <StarRating value={props.rating}/>
+        
+                <StarRating value={props.rating}/> <span>(32)</span>
         
             <p>{props.location}</p>
         </div>

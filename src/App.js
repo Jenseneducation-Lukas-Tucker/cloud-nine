@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Saloon from './Saloon/Saloon';
 import Filter from './Filter/filter';
+import { BrowserRouter } from 'react-router-dom';
+import {Route} from 'react-router-dom';
+import Hair from './Hair/Hair';
+
 
 class App extends Component {
   state = {
@@ -41,13 +45,6 @@ class App extends Component {
     }))
   }
 
-  deleteSaloonHandler = (saloonIndex) => {
-    // const persons = this.state.persons.slice();
-    const saloons = [...this.state.saloons];
-    saloons.splice(saloonIndex, 1);
-    this.setState({saloons: saloons});
-  }
-
   toggleFilterHandler = () => {
     const doesShow = this.state.showFilters;
     this.setState( { showFilters: !doesShow } );
@@ -63,7 +60,9 @@ class App extends Component {
     };
 
     return (
+      <BrowserRouter>
       <div className="App">
+      <Route path="/" exact render={() =>       <div>
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
         <button
@@ -75,12 +74,11 @@ class App extends Component {
         sort={this.state.sort}
         sortSaloons={this.sortSaloons}
         ></Filter>
-        </div> :null
-        
-  }<div>
-  {this.state.saloons.map((saloon, index) => {
+        </div> :null  
+        }
+  <div>
+  {this.state.saloons.map((saloon) => {
     return <Saloon
-      click={() => this.deleteSaloonHandler(index)}
       name={saloon.name} 
       price={saloon.price}
       key={saloon.id}
@@ -88,9 +86,16 @@ class App extends Component {
       location={saloon.location}/>
   })}
 </div>
+</div>}/>
+
+<div>
+<Route path="/moreinfo" exact component={Hair}></Route>
+</div>
       </div>
+
+      </BrowserRouter>
     );
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
+
   }
 }
 

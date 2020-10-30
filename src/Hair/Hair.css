@@ -1,0 +1,8 @@
+.Heart{
+    position: relative;
+}
+.ratingContaine{
+    display: grid;
+    justify-content: center;
+    flex-direction: row;
+}

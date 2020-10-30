@@ -9,8 +9,9 @@ const Saloon = ( props ) => {
             <a href="/moreinfo">more info</a>
             <p onClick={props.click}>Welcome to {props.name}</p>
     <p>Price: {props.price}</p>
-        
+        <div>
                 <StarRating value={props.rating}/> <span>(32)</span>
+                </div>
         
             <p>{props.location}</p>
         </div>

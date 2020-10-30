@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { FaStar } from 'react-icons/fa';
 import "./StarRating.css"
 
+// i know you can just install an npm package but thought it was best practice to do it myself!
+
 const StarRating = () => {
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
@@ -20,7 +22,7 @@ const StarRating = () => {
                     onClick={() => setRating(ratingValue)}
                     />
              <FaStar 
-                color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+                color={ratingValue <= (hover || rating) ? "#b69f58" : "#e4e5e9"}
                 size={20} 
                 className="star"
                 onMouseEnter={() => setHover(ratingValue)}

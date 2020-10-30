@@ -13,7 +13,8 @@ class App extends Component {
       { id: 'as2353', name: 'Hårley Davidson', price: 320, location:'Rådmansgatan 46' },
     ],
     sort:"",
-    showSaloons: false
+    showSaloons: false,
+    showFilters: false
   }
   sortSaloons = (event) => {
     //implement 
@@ -25,14 +26,14 @@ class App extends Component {
       .slice()
       .sort((a , b) => 
         sort === "lowest"
-        ? a.saloons.price > b.saloons.price
+        ? a.price > b.price
         ? 1
         : -1
         : sort === "highest"
-        ? a.saloons.price < b.saloons.price
+        ? a.price < b.price
         ? 1
         :-1
-        : a._id > b._id
+        : a.id > b.id
         ? 1
         :-1
 
@@ -66,9 +67,9 @@ class App extends Component {
     this.setState({saloons: saloons});
   }
 
-  toggleSaloonHandler = () => {
-    const doesShow = this.state.showSaloons;
-    this.setState( { showSaloons: !doesShow } );
+  toggleFilterHandler = () => {
+    const doesShow = this.state.showFilters;
+    this.setState( { showFilters: !doesShow } );
   }
 
   render () {
@@ -82,33 +83,30 @@ class App extends Component {
 
     let saloons = null;
 
-    if ( this.state.showSaloons ) {
-      saloons = (
-        <div>
-          {this.state.saloons.map((saloon, index) => {
-            return <Saloon
-              click={() => this.deleteSaloonHandler(index)}
-              name={saloon.name} 
-              price={saloon.price}
-              key={saloon.id}
-              changed={(event) => this.nameChangedHandler(event, saloon.id)} />
-          })}
-        </div>
-      );
-    }
-
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
+        <button
+          style={style}
+          onClick={this.toggleFilterHandler}>Toggle Filters</button>
+          { this.state.showFilters === true ?
+          <div>
         <Filter count={this.state.saloons.length}
         sort={this.state.sort}
         sortSaloons={this.sortSaloons}
         ></Filter>
-        <button
-          style={style}
-          onClick={this.toggleSaloonHandler}>Toggle Saloons</button>
-        {saloons}
+        </div> :null
+  }<div>
+  {this.state.saloons.map((saloon, index) => {
+    return <Saloon
+      click={() => this.deleteSaloonHandler(index)}
+      name={saloon.name} 
+      price={saloon.price}
+      key={saloon.id}
+      changed={(event) => this.nameChangedHandler(event, saloon.id)} />
+  })}
+</div>
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));

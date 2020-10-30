@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './Saloon.css';
+import StarRating from '../StarRating/StarRating';
 
 const Saloon = ( props ) => {
     return (
@@ -8,6 +9,7 @@ const Saloon = ( props ) => {
             <p onClick={props.click}>Welcome to {props.name}</p>
     <p>Price: {props.price}</p>
             <p>{props.children}</p>
+            <StarRating/>
             <input type="text" onChange={props.changed} value={props.name} />
         </div>
     )

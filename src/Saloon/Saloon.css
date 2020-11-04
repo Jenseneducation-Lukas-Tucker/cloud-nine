@@ -1,0 +1,7 @@
+.Saloon {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 1px 1px #ccc;
+    padding: 16px;
+    text-align: center
+}

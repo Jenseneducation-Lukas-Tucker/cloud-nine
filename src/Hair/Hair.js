@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import HeaderPic from '../assets/10731CFB-6801-4BA0-934D-F170BEDA6733.png'
 import HeartIcon from '../assets/HeartIcon.svg'
 import './Hair.css'
 import StarRating from '../StarRating/StarRating'
 
-export default class Hair extends Component {
-    render() { 
+const Hair = ( props ) => {
         return ( 
         <div className="Hair">
             <header>
@@ -16,8 +15,10 @@ export default class Hair extends Component {
             <div className="ratingContainer">
             <StarRating/> <span>(32)</span>
             </div>
+        <h4>{props.name}</h4>
             </header>
         </div>
          );
     }
-}
+
+export default Hair;

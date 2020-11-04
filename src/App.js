@@ -53,7 +53,7 @@ class App extends Component {
   render () {
     const style = {
       backgroundColor: 'white',
-      font: 'inherit',
+      font: 'MillerBanner',
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer'
@@ -63,7 +63,7 @@ class App extends Component {
       <BrowserRouter>
       <div className="App">
       <Route path="/" exact render={() =>       <div>
-        <h1>Hi, I'm a React App</h1>
+        <h5>Hår</h5>
         <p>This is really working!</p>
         <button
           style={style}
@@ -89,7 +89,17 @@ class App extends Component {
 </div>}/>
 
 <div>
-<Route path="/moreinfo" exact component={Hair}></Route>
+<Route path="/:id" exact render={ () => <div>
+  {this.state.saloons.map((saloon) => {
+    return <Hair
+    name={saloon.name} 
+    price={saloon.price}
+    key={saloon.id}
+    rating={saloon.rating}
+    location={saloon.location}/>
+  })}
+
+</div>}></Route>
 </div>
       </div>
 
